@@ -1,9 +1,13 @@
-promise retornar uma reposta em caso de sucesso ou erro. È um Callback simples, trás o resultado ou falha, promessa de um resultado 
+# RXJS - Observables
+promise retornar uma reposta em caso de sucesso ou erro. È um Callback simples, trás o resultado ou falha, promessa de um resultado  
+Observable: mais completo, reativo, é um promisse que pode ser convertido em promisse, retornar dados, a observable continua a entrega os dados , permanecendo viva a cada entrega.   
+Observable pode ser cancelado. Retry: nova tentativa de execução da Observable após o erro. Muito mais complexo. Push e pull(enviar e receber).  
 
-Observable: mais completo, reativo, é um promisse que pode ser convertido em promisse, retornar dados, a observable continua a entrega os dados , permanecendo viva a cada entrega. 
+## Observares  
 
-Observable pode ser cancelado. Retry: nova tentativa de execução da Observable após o erro. Muito mais complexo. Push e pull(enviar e receber). 
+Existe a observable e o OBSERVER(OBSERVADOR), para que um "observer" exista é necessário a existência de um "Observable" e um "subscriber"  
+**Observer:** Nada mais é que uma estrutura voltada a trabalhar com a subscription de uma OBSERVABLE
 
 
-ng new RXJS --minimal=true
-
+## Outras Anotações 
+Cria um novo projeto com o mínimo de configurações do Angular: ng new RXJS --minimal=true  

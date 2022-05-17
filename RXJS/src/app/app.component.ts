@@ -50,7 +50,17 @@ export class AppComponent implements OnInit {
     ).catch(error => console.log('Promisse 2: Você não é o Paulo'))
 
     /** Primeira Instrução Lógica trás o sucesso e a segunda trás o erro */
-    this.minhaObservable('Paulo').subscribe(result => console.log(result), erro => console.log(erro))
+    this.minhaObservable('Paulo').subscribe(result => console.log(result), erro => console.log(erro));
+
+    const observer = {
+      next: (valor: any) => {
+        return console.log('Next: ', valor);
+      },
+      erro: (erro: any) => {
+        return console.log('Erro: ', erro);
+      },
+      complete: () => console.log('FIM !')
+    }
   }
 
 
