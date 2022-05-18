@@ -41,6 +41,49 @@ export class AppComponent implements OnInit {
     })
   }
 
+  usuarioObservable(nome: string, email: string) : Observable<Usuario> {
+    
+    return new Observable(subscriber => {
+      if (nome === 'Admin') {
+
+        /** Tipo do Objeto Trabalhado */
+        let usuario = new Usuario(nome, email); 
+
+        setTimeout(() => {
+          subscriber.next(usuario);
+        }, 1000);
+
+        setTimeout(() => {
+          subscriber.next(usuario);
+        }, 2000);
+
+        setTimeout(() => {
+          subscriber.next(usuario);
+        }, 3000);
+
+        setTimeout(() => {
+          subscriber.next(usuario);
+        }, 4000);
+
+        setTimeout(() => {
+          subscriber.next(usuario);
+        }, 5000);
+
+        setTimeout(() => {
+          subscriber.complete();
+        }, 5000);
+
+        
+
+      } else {
+        subscriber.error('Ops! Deu erro!');
+      }
+    });
+  }
+
+
+  /** **************************** */
+
   ngOnInit(): void {
 
     this.minhaPromisse('Paulo').then(
@@ -58,22 +101,40 @@ export class AppComponent implements OnInit {
       () => console.log('FIM !') );
 
     const observer = {
-      next: this.escrever('metodo dentro do observer'),
-      erro: (erro: any) => {
-        return console.log('Erro: ', erro);
-      },
+      next: (valor: any) => console.log('Next: ', valor),
+      erro: (erro: any) => console.log('Erro: ', erro),
       complete: () => console.log('FIM !')
     }
 
-    const obs = this.minhaObservable('Paulo');
-   // obs.subscribe(observer);
+    /* const obs = this.minhaObservable('Paulo'); */
+
+    const obs = this.usuarioObservable('Admin', 'admin@admin.com');
+    const subs = obs.subscribe(observer);
+
+    setTimeout(() => {
+      /** è possivel adicionar uma subscription filha */
+      subs.unsubscribe(); /** Não é o mesmo que o complete. Ele encerra antes do complete */
+      console.log('Conexão fechada: ' + subs.closed) /** sub.closed é um flag que retorna um valor boleano */
+    }, 3500);
   
   }
 
-  escrever(texto: string) {
-    console.log(texto);
-  }
-
-
+  // escrever(texto: string) {
+  //   console.log(texto);
+  // }
 
 }
+
+export class Usuario {
+
+  constructor(nome: string, email: string) {
+    this.nome = nome;
+    this.email = email;
+  }
+
+  nome: string;
+  email: string;
+
+}
+
+
